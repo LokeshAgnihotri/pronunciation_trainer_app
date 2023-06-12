@@ -41,9 +41,7 @@ dependencies:
       - idna
       - playsound
       - pydub
-      - pypiwin32
       - pyttsx3
-      - pywin32
       - requests
       - speechrecognition
       - urllib3
