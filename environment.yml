@@ -28,8 +28,6 @@ dependencies:
   - tk
   - tomli
   - tzdata
-  - vc
-  - vs2015_runtime
   - werkzeug
   - wheel
   - xz
