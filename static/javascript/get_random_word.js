@@ -1,3 +1,7 @@
+document.getElementById("next").addEventListener("click", next_word);
+const next_button_audio = document.getElementById("next_button_audio");
+
+
 function next_word() {
     fetch('http://127.0.0.1:5000/next_word')
       .then(response => response.json()) // Parse the response as JSON
@@ -8,9 +12,13 @@ function next_word() {
 
         document.getElementById("reftext").value = `Your random word is: ${randomWord} and its phonetics are: ${randomWordIpa}`;
 
-        document.getElementById("audioPlayer").src = randomWordAudio
+        document.getElementById("next_button_audio").src = randomWordAudio;
       });
   }
 
-  document.getElementById("next").addEventListener("click", next_word);
+next_button_audio.onclick = function() {
+    next_button_audio.play();
+}
+
+
 

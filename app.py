@@ -91,7 +91,7 @@ def random_word():
 
     convert_text_to_speech(random_word, reference_recordings_path + pronunciation_audio_file)
 
-    return jsonify({'random_word': random_word, 'random_word_ipa': random_word_ipa,
+    return jsonify({'random_word': selected_word, 'random_word_ipa': random_word_ipa,
                     'pronunciation_audio': reference_recordings_path + pronunciation_audio_file})
 
 
