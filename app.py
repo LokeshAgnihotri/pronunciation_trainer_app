@@ -37,8 +37,8 @@ def getAudio(file_name):
 # speeech  to text
 
 def convert_audio_to_text(audio_file_location_name):
-    converted_file = "C:\Users\lokes\OneDrive\Desktop\Ai-trainer\captured_recordings\converted_audio.wav"
-
+    audio_file_location_name = "captured_recordings/audio.wav"
+    converted_file = "captured_recordings/converted_audio.wav"
     # Convert audio file to PCM WAV format
     audio = AudioSegment.from_file(audio_file_location_name)
     audio.export(converted_file, format="wav")
@@ -49,6 +49,7 @@ def convert_audio_to_text(audio_file_location_name):
         text = r.recognize_google(audio_data)
     import os
     os.remove(converted_file)
+    print(text)
     return text
 
 
@@ -127,12 +128,7 @@ def upload_audio():
         file_path = os.path.join(save_path, 'audio.wav')
         audio_file.save(file_path)
 
-        # Convert the recorded audio to text
-        r = sr.Recognizer()
-        with sr.AudioFile(file_path) as source:
-            audio = r.record(source)
-            text = r.recognize_google(audio)
-
+        text = convert_audio_to_text(save_path)
         # Return the converted text as JSON
         return jsonify({'text': text})
     else:
