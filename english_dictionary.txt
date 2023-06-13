@@ -1,26 +1,27 @@
-apple
-banana
-cat
-dog
-elephant
-fruit
-grape
-hello
-internet
-jazz
-kangaroo
-lemon
-monkey
-notebook
-orange
-penguin
-queen
-rabbit
-sunset
-turtle
-umbrella
-violet
-watermelon
-xylophone
-yellow
-zebra
+apple is good for health
+banana is good for health
+cat is a pet
+dog is a pet
+elephant is a big animal
+fruit is good for health
+grape is a fruit
+hello is a greeting
+internet is a network
+jazz is a music
+kangaroo is a big animal
+lemon is a fruit
+monkey is a pet
+notebook is a book
+orange is a fruit
+penguin is a bird
+queen is a king
+rabbit is a pet
+sunset is a time
+turtle is a pet
+umbrella is a thing
+violet is a color
+watermelon is a fruit
+xylophone is a music instrument
+yellow is a color
+zebra is a animal
+```

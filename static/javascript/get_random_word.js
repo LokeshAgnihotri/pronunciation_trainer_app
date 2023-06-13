@@ -9,8 +9,9 @@ function next_word() {
         const randomWord = data.random_word;
         const randomWordIpa = data.random_word_ipa;
         const randomWordAudio = data.pronunciation_audio;
+        const  combined = randomWord + " " + randomWordIpa;
 
-        document.getElementById("reftext").value = `Your random word is: ${randomWord} and its phonetics are: ${randomWordIpa}`;
+        document.getElementById("reftext").value = `${randomWord}\n${randomWordIpa}`;
 
         document.getElementById("next_button_audio").src = randomWordAudio;
       });

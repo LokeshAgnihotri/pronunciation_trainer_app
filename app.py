@@ -1,7 +1,7 @@
 import json
 import os
 import random
-
+from pydub import AudioSegment
 import eng_to_ipa as ipa
 import pyttsx3
 import speech_recognition as sr
@@ -32,6 +32,24 @@ def getAudio(file_name):
     response.headers['Content-Type'] = 'audio/wav'
     response.headers['Content-Disposition'] = 'attachment; filename=sound.wav'
     return response
+
+
+# speeech  to text
+
+def convert_audio_to_text(audio_file_location_name):
+    converted_file = "C:\Users\lokes\OneDrive\Desktop\Ai-trainer\captured_recordings\converted_audio.wav"
+
+    # Convert audio file to PCM WAV format
+    audio = AudioSegment.from_file(audio_file_location_name)
+    audio.export(converted_file, format="wav")
+    r = sr.Recognizer()
+    # Load the converted audio file
+    with sr.AudioFile(converted_file) as source:
+        audio_data = r.record(source)
+        text = r.recognize_google(audio_data)
+    import os
+    os.remove(converted_file)
+    return text
 
 
 #  A method to convert the text to speech using pyttsx3
