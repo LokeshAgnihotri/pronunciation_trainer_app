@@ -135,6 +135,21 @@ def upload_audio():
         return 'No audio file found in the request'
 
 
+
+
+#  Send text to java script
+
+@app.route('/send_data', methods=['POST'])
+def send_data():
+    data = {'message': 'Hello, world!'}
+    return jsonify(data)
+
+@app.route('/send_data', methods=['POST'])
+def send_data():
+    data = {'message': 'Hello, world!'}
+    return jsonify(data)
+
+
 if __name__ == '__main__':
     language = 'en'
     app.run(host="0.0.0.0", port=5000, debug=True)
