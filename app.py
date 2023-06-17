@@ -130,11 +130,17 @@ def upload_audio():
 
         text = convert_audio_to_text(save_path)
         # Return the converted text as JSON
-        return jsonify({'text': text})
+        print(jsonify({'text': text}))
     else:
-        return 'No audio file found in the request'
+        print('No audio file found in the request')
 
+    if 'ref_text' in request.form:
+        ref_text = request.form['ref_text']
+        print(ref_text)
+    else:
+        print("No ref_text in request")
 
+    return jsonify({'text': "ref_text"})
 
 
 #  Send text to java script
@@ -145,20 +151,19 @@ def send_data():
     return jsonify(data)
 
 
+def get_accuracy(ref_text, actual_text):
+    # Accuracy...
+    good_array = []
+    bad_array = []
+    ref_text_array = ref_text.split()
+    spoken_text_array = actual_text.split()
 
-# Accuracy...
-good_array = []
-bad_array = []
-ref_text_array = ref_text.split()
-spoken_text_array = actual_text.split()
-
-for i in range(0, len(ref_text_array), 1):
-    if ref_text_array[i] != spoken_text_array[i]:
-        if len(ref_text_array) == len(spoken_text_array):
-            for letter1, letter2 in zip(ref_text_array[i], spoken_text_array[i]):
-                if letter1 != letter2:
-                    print(f"Letter '{letter1}' is different from '{letter2}'")
-
+    for i in range(0, len(ref_text_array), 1):
+        if ref_text_array[i] != spoken_text_array[i]:
+            if len(ref_text_array) == len(spoken_text_array):
+                for letter1, letter2 in zip(ref_text_array[i], spoken_text_array[i]):
+                    if letter1 != letter2:
+                        print(f"Letter '{letter1}' is different from '{letter2}'")
 
 
 if __name__ == '__main__':

@@ -32,10 +32,20 @@ closeBrowserNotSupportedBoxButton.onclick = hideBrowserNotSupportedOverlay;
 //Listen to when the audio being played ends
 audioElement.onended = hideTextIndicatorOfAudioPlaying;
 
+const textArea = document.getElementById("reftext");
+
 function sendAudioData(recorderAudioAsBlob) {
+
+    var ref_text = textArea.value;
+    console.log(ref_text);
+
+    // keep only the first line
+    ref_text = ref_text.split("\n")[0];
 
   // Create a FormData object
   var formData = new FormData();
+
+  formData.append('ref_text', ref_text);
 
   // Append the audio blob
   formData.append('audio', recorderAudioAsBlob, 'audio.wav');
