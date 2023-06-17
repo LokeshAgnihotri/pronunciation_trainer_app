@@ -55,18 +55,12 @@ function sendAudioData(recorderAudioAsBlob) {
     method: 'POST',
     body: formData
   })
-    .then(function(response) {
-      // Handle the response from the backend
-      console.log('Audio data sent successfully');
-      fetch('/upload-audio')
-        .then(response => response.json())
-        .then(data => {
-            const  acc = data.accuracy;
-            document.getElementById('accuracyTextbox').textContent = acc;
-            console.log(acc)
-        })
-
-    })
+      .then(response => response.json()) // Parse the response as JSON
+      .then(data => {
+        var message = data.message;
+        console.log(message)
+        document.getElementById('accuracyscore').textContent = message;
+      })
     .catch(function(error) {
       // Handle errors that occurred during the request
       console.error('Error sending audio data:', error);
