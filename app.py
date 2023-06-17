@@ -19,7 +19,7 @@ app.config['UPLOAD_FOLDER'] = 'reference_recordings/'
 reference_recordings_path = 'reference_recordings/'
 captured_recordings_path = 'captured_recordings/'
 
-
+reference_text = ''
 @app.route(rootPath + '/')
 def main():
     return render_template('UI.html')
@@ -118,52 +118,48 @@ def random_word():
 
 
 # route to receive the audioop
-@app.route('/upload-audio', methods=['POST'])
+@app.route('/upload-audio', methods=['POST','GET'])
 def upload_audio():
-    if 'audio' in request.files:
-        audio_file = request.files['audio']
-        save_path = os.path.join(captured_recordings_path)
-        if not os.path.exists(save_path):
-            os.makedirs(save_path)
-        file_path = os.path.join(save_path, 'audio.wav')
-        audio_file.save(file_path)
+    if 'audio' not in request.files:
+        return "error there is no audio"
+    if 'ref_text' not in request.form:
+        return "no text received"
 
-        text = convert_audio_to_text(save_path)
-        # Return the converted text as JSON
-        print(jsonify({'text': text}))
-    else:
-        print('No audio file found in the request')
+    audio_file = request.files['audio']
+    save_path = os.path.join(captured_recordings_path)
+    if not os.path.exists(save_path):
+        os.makedirs(save_path)
+    file_path = os.path.join(save_path, 'audio.wav')
+    audio_file.save(file_path)
+    text = convert_audio_to_text(save_path)
+    print(jsonify({'text': text}))
 
-    if 'ref_text' in request.form:
-        ref_text = request.form['ref_text']
-        print(ref_text)
-    else:
-        print("No ref_text in request")
-
-    return jsonify({'text': "ref_text"})
+    ref_text = request.form['ref_text']
+    accuracy = 4#get_accuracy(ref_text, text)
+    return jsonify ({'message': accuracy})
 
 
-#  Send text to java script
 
-@app.route('/send_data', methods=['POST'])
-def send_data():
-    data = {'message': 'Hello, world!'}
-    return jsonify(data)
 
 
 def get_accuracy(ref_text, actual_text):
     # Accuracy...
-    good_array = []
-    bad_array = []
+    correct_letter = 0
+    total_letters = 0
+    for char in ref_text:
+        if char.isalpha():
+            total_letters += 1
     ref_text_array = ref_text.split()
     spoken_text_array = actual_text.split()
-
-    for i in range(0, len(ref_text_array), 1):
+    for i in range(0, len(ref_text_array)):
         if ref_text_array[i] != spoken_text_array[i]:
             if len(ref_text_array) == len(spoken_text_array):
                 for letter1, letter2 in zip(ref_text_array[i], spoken_text_array[i]):
-                    if letter1 != letter2:
-                        print(f"Letter '{letter1}' is different from '{letter2}'")
+                    if letter1 == letter2:
+                        correct_letter += 1
+    return correct_letter/total_letters
+
+
 
 
 if __name__ == '__main__':

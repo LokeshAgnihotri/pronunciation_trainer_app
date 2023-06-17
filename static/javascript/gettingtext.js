@@ -1,8 +1,9 @@
- // fetch('/send_data', {
- //            method: 'POST'
+ // fetch('/upload-audio', {
+ //            method: 'GET'
  //        })
  //        .then(response => response.json())
  //        .then(data => {
- //            var message = data.message;
- //            document.getElementById('not availablr for now').textContent = message;
+ //            var message = data.accuracy;
+ //            console.log(message)
+ //            document.getElementById('accuracyscore').textContent = message;
  //        });

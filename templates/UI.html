@@ -11,122 +11,230 @@
     <link rel="stylesheet" href="../static/stylesheet/reset.css" />
     <link rel="stylesheet" href="../static/stylesheet/font.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" />
+    <style>
+        /* Add your custom CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        #reftextform textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .button-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .h-button, .green-button, .blue-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .h-button {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+        }
+
+        .green-button {
+            background-color: #2ecc71;
+            color: #fff;
+            border: none;
+        }
+
+        .blue-button {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+        }
+
+        .animate-bottom {
+            animation: slide-up 0.5s;
+        }
+
+        @keyframes slide-up {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        #footeralert {
+            text-align: center;
+            padding: 10px;
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 
 <body>
+    <div class="container">
+        <div id="ttscont">
+            <div class="button-container">
+                <button id="button_pronounce_trainer" class="h-button">
+                    <span class="fas fa-headphones"></span> Pronunciation Trainer
+                </button>
+            </div>
 
-<div class="container">
-    <div id="ttscont" class="container">
+            <div id="ttsList"></div>
+            <div id="ttsloader" class="container">
+                <div id="loader"></div>
+            </div>
+        </div>
+
+        <div id="formcontainer">
+            <form id="reftextform">
+                <textarea id="reftext" rows="3" cols="80" name="reftext" maxlength="160" autofocus
+                          placeholder="Enter Sentence here..."></textarea>
+            </form>
+            <br>
+        </div>
+
         <div class="button-container">
-            <button id="button_pronounce_trainer" class="h-button">
-                <span class="fas fa-headphones"></span> Pronunciation Trainer
+            <button id="microphone" class="green-button">
+                <span class="fa fa-microphone"></span> Record
+            </button>
+            <button id="next" class="blue-button">
+                <span class="fa fa-random"></span> Next Sentence
             </button>
         </div>
 
-        <div id="ttsList"></div>
-        <div id="ttsloader" class="container">
-            <div id="loader"></div>
-        </div>
-    </div>
+        <div id="recordcont">
+            <div id="recordingsList"></div>
 
-    <div id="formcontainer" class="container">
-        <form id="reftextform">
-        <textarea id="reftext" rows="3" cols="80" name="reftext" maxlength="160" autofocus
-                  placeholder="Enter Sentence here..."></textarea>
-        </form>
-        <br>
-    </div>
-
-    <div class="button-container">
-        <button id="microphone" class="green-button">
-            <span class="fa fa-microphone"></span> Record
-        </button>
-        <button id="next" class="blue-button">
-            <span class="fa fa-random"></span> Next Sentence
-        </button>
-    </div>
-
-    <div id="recordcont" class="container">
-        <div id="recordingsList"></div>
-
-        <div id="recordloader" class="container">
-            <div id="loader"></div>
-        </div>
-
-        <div id="metrics" class="animate-bottom">
-            <div class="container">
-                <div id="summarytable">
-                    <table>
-                        <tr>
-                            <th>Accuracy Score</th>
-                            <!-- <th>Fluency Score</th>
-                            <th>Completeness Score</th>
-                            <th>Pronunciation Score</th>
-                            <th id="woh">Words Omitted</th>
-                            <th id="wih">Extra Words Spoken</th> -->
-                        </tr>
-                        <tr>
-                            <td id="accuracyscore"></td>
-                            <!-- <td id="fluencyscore"></td>
-                            <td id="completenessscore"></td>
-                            <td id="pronscore"></td>
-                            <td id="wordsomitted"></td>
-                            <td id="wordsinserted"></td> -->
-                        </tr>
-                    </table>
-                </div>
+            <div id="recordloader" class="container">
+                <div id="loader"></div>
             </div>
 
-            <div class="container">
-                <div id="detailedtable">
-                    <table>
-                        <tr id="wordrow"></tr>
-                        <tr id="phonemerow"></tr>
-                        <tr id="scorerow"></tr>
-                    </table>
+            <div id="metrics" class="animate-bottom">
+                <div class="container">
+                    <div id="summarytable">
+                        <table>
+                            <tr>
+                                <th>Accuracy Score</th>
+                            </tr>
+                            <tr>
+                                <td id="accuracyscore"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div id="detailedtable">
+                        <table>
+                            <tr id="wordrow"></tr>
+                            <tr id="phonemerow"></tr>
+                            <tr id="scorerow"></tr>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <footer id="footeralert">Please allow the use of your microphone.</footer>
     </div>
 
-    <footer id="footeralert">Please allow the use of your microphone.</footer>
-</div>
-
-<div class="container">
-    <div id="audioPlayerContainer">
-        <audio id="next_button_audio" controls autoplay></audio>
-    </div>
-</div>
-
-
-<div class="audio-recording-container">
-    <div class="recording-contorl-buttons-container hide">
-        <i class="cancel-recording-button fa fa-times-circle-o" aria-hidden="true"></i>
-        <div class="recording-elapsed-time">
-            <i class="red-recording-dot fa fa-circle" aria-hidden="true"></i>
-            <p class="elapsed-time"></p>
+    <div class="container">
+        <div id="audioPlayerContainer">
+            <audio id="next_button_audio" controls autoplay></audio>
         </div>
-        <i class="stop-recording-button fa fa-stop-circle-o" aria-hidden="true"></i>
     </div>
-    <div class="text-indication-of-audio-playing-container">
-        <p class="text-indication-of-audio-playing hide">Audio is playing<span>.</span><span>.</span><span>.</span></p>
+
+    <div class="audio-recording-container">
+        <div class="recording-contorl-buttons-container hide">
+            <i class="cancel-recording-button fa fa-times-circle-o" aria-hidden="true"></i>
+            <div class="recording-elapsed-time">
+                <i class="red-recording-dot fa fa-circle" aria-hidden="true"></i>
+                <p class="elapsed-time"></p>
+            </div>
+            <i class="stop-recording-button fa fa-stop-circle-o" aria-hidden="true"></i>
+        </div>
+        <div class="text-indication-of-audio-playing-container">
+            <p class="text-indication-of-audio-playing hide">Audio is playing<span>.</span><span>.</span><span>.</span></p>
+        </div>
     </div>
+
+    <div class="overlay hide">
+        <div class="browser-not-supporting-audio-recording-box">
+            <p>To record audio, use browsers like Chrome and Firefox that support audio recording.</p>
+            <button type="button" class="close-browser-not-supported-box">Ok.</button>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <div class="container">
+  <h1>Speech-to-Text Accuracy</h1>
+  <div id="ttscont">
+    <h2>Accuracy Score:</h2>
+    <p id="accuracyScore">-</p>
+    <div class="accuracy-description">
+      <p>This is the accuracy score obtained from the backend.</p>
+    </div>
+    <div class="accuracy-textbox">
+      <label for="accuracyTextbox">Accuracy Score:</label>
+      <input type="text" id="accuracyTextbox" readonly>
+    </div>
+  </div>
 </div>
 
-<div class="overlay hide">
-    <div class="browser-not-supporting-audio-recording-box">
-        <p>To record audio, use browsers like Chrome and Firefox that support audio recording.</p>
-        <button type="button" class="close-browser-not-supported-box">Ok.</button>
-    </div>
-</div>
 
-<audio controls class="audio-element hide">
-</audio>
 
-<script src="../static/javascript/pronunciation_trainer.js"></script>
-<script src="../static/javascript/get_random_word.js"></script>
-<script src="../static/javascript/record.js"></script>
 
+
+
+
+
+
+    <audio controls class="audio-element hide"></audio>
+
+    <script src="../static/javascript/pronunciation_trainer.js"></script>
+    <script src="../static/javascript/get_random_word.js"></script>
+    <script src="../static/javascript/record.js"></script>
+    <script src="../static/javascript/gettingtext.js"></script>
 </body>
 
 </html>

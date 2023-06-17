@@ -58,6 +58,14 @@ function sendAudioData(recorderAudioAsBlob) {
     .then(function(response) {
       // Handle the response from the backend
       console.log('Audio data sent successfully');
+      fetch('/upload-audio')
+        .then(response => response.json())
+        .then(data => {
+            const  acc = data.accuracy;
+            document.getElementById('accuracyTextbox').textContent = acc;
+            console.log(acc)
+        })
+
     })
     .catch(function(error) {
       // Handle errors that occurred during the request
