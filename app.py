@@ -144,10 +144,21 @@ def send_data():
     data = {'message': 'Hello, world!'}
     return jsonify(data)
 
-@app.route('/send_data', methods=['POST'])
-def send_data():
-    data = {'message': 'Hello, world!'}
-    return jsonify(data)
+
+
+# Accuracy...
+good_array = []
+bad_array = []
+ref_text_array = ref_text.split()
+spoken_text_array = actual_text.split()
+
+for i in range(0, len(ref_text_array), 1):
+    if ref_text_array[i] != spoken_text_array[i]:
+        if len(ref_text_array) == len(spoken_text_array):
+            for letter1, letter2 in zip(ref_text_array[i], spoken_text_array[i]):
+                if letter1 != letter2:
+                    print(f"Letter '{letter1}' is different from '{letter2}'")
+
 
 
 if __name__ == '__main__':
