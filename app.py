@@ -20,6 +20,8 @@ reference_recordings_path = 'reference_recordings/'
 captured_recordings_path = 'captured_recordings/'
 
 reference_text = ''
+
+
 @app.route(rootPath + '/')
 def main():
     return render_template('UI.html')
@@ -118,7 +120,7 @@ def random_word():
 
 
 # route to receive the audioop
-@app.route('/upload-audio', methods=['POST','GET'])
+@app.route('/upload-audio', methods=['POST', 'GET'])
 def upload_audio():
     if 'audio' not in request.files:
         return "error there is no audio"
@@ -135,11 +137,8 @@ def upload_audio():
     print(jsonify({'text': text}))
 
     ref_text = request.form['ref_text']
-    accuracy = 4#get_accuracy(ref_text, text)
-    return jsonify ({'message': accuracy})
-
-
-
+    accuracy = 4  # get_accuracy(ref_text, text)
+    return jsonify({'message': accuracy})
 
 
 def get_accuracy(ref_text, actual_text):
@@ -157,9 +156,7 @@ def get_accuracy(ref_text, actual_text):
                 for letter1, letter2 in zip(ref_text_array[i], spoken_text_array[i]):
                     if letter1 == letter2:
                         correct_letter += 1
-    return correct_letter/total_letters
-
-
+    return correct_letter / total_letters
 
 
 if __name__ == '__main__':
