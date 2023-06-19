@@ -11,7 +11,7 @@ function next_word() {
         const randomWordAudio = data.pronunciation_audio;
         const  combined = randomWord + " " + randomWordIpa;
 
-        document.getElementById("reftext").value = `${randomWord}\n${randomWordIpa}`;
+        document.getElementById("reftext").value = `${randomWord}`;
 
         document.getElementById("next_button_audio").src = randomWordAudio;
       });

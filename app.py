@@ -99,7 +99,7 @@ def getAudioFromText():
 # Suggest next word
 @app.route('/next_word')
 def random_word():
-    with open('english_dictionary.txt', 'r') as file:
+    with open('pronunciation_trainer_app\english_dictionary.txt', 'r') as file:
         words = file.read().splitlines()
     selected_word = random.choice(words)
     random_word_ipa = ipa.convert(selected_word)

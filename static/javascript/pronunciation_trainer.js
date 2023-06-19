@@ -25,7 +25,7 @@ _button_pronounce_trainer.onclick = function () {
             alert("something is wrong")
         }
     }).then(jsonResponse => {
-        _reftext.value = 'The phoentics are :'+jsonResponse['phenome'];
+        _reftext.value = jsonResponse['phenome'];
 
 
 
