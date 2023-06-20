@@ -143,9 +143,7 @@ dependencies:
       - protobuf
       - pydub
       - pyparsing
-      - pypiwin32
       - pyttsx3
-      - pywin32
       - requests
       - scipy
       - seaborn
