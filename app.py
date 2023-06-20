@@ -1,6 +1,8 @@
 import json
 import os
 import random
+from ast import literal_eval
+
 from pydub import AudioSegment
 import eng_to_ipa as ipa
 import pyttsx3
@@ -18,9 +20,7 @@ rootPath = ''
 app.config['UPLOAD_FOLDER'] = 'reference_recordings/'
 
 reference_recordings_path = 'reference_recordings/'
-reference_recordings_path = 'C:/Users/lokes/Desktop/aI-TRAINER/pronunciation_trainer_app/reference_recordings/'
-captured_recordings_path = 'captured_recordings'
-
+captured_recordings_path = 'captured_recordings/'
 
 reference_text = ''
 
@@ -33,7 +33,7 @@ def main():
 @app.route(rootPath + '/reference_recordings/', methods=['GET', 'POST'])
 @app.route(rootPath + '/reference_recordings/<file_name>', methods=['GET', 'POST'])
 def getAudio(file_name):
-    response = make_response(open(reference_recordings_path + file_name, 'rb').read())
+    response = make_response(open(reference_recordings_path + file_name + ".mpeg", 'rb').read())
     response.headers['Content-Type'] = 'audio/wav'
     response.headers['Content-Disposition'] = 'attachment; filename=sound.wav'
     return response
@@ -60,12 +60,14 @@ def convert_audio_to_text(audio_file_location_name):
 
 #  A method to convert the text to speech using pyttsx3
 def convert_text_to_speech(text, audio_name_location):
+    print(text)
     engine = pyttsx3.init()
     voices = engine.getProperty('voices')
     engine.setProperty('voice', voices[1].id)  # changing voice to index 1 for female voice
-    engine.save_to_file(text, audio_name_location)
+    pronunciation_audio_file = f"{audio_name_location}.mpeg"
+    engine.save_to_file(text, pronunciation_audio_file)
     engine.runAndWait()
-    return audio_name_location
+    return pronunciation_audio_file
 
 
 # convert text to IPA
@@ -80,7 +82,15 @@ def pronunciation_trainer():
     text = event['body']
     # text = request.json['text']
     phenome = convert_text_to_ipa(text)
-    sound = convert_text_to_speech(text, reference_recordings_path + "test.mpeg")
+
+    #   Generate the audio file for the pronunciation
+
+    ref_audio_save_path = os.path.join(reference_recordings_path)
+    if not os.path.exists(ref_audio_save_path):
+        os.makedirs(ref_audio_save_path)
+
+    ref_audio_file_save_path = os.path.join(ref_audio_save_path, literal_eval(text).replace(' ', '_'))
+    sound = convert_text_to_speech(text, ref_audio_file_save_path)
 
     #   Create JSON response
     response = {
@@ -102,21 +112,21 @@ def getAudioFromText():
 # Suggest next word
 @app.route('/next_word')
 def random_word():
-    with open('pronunciation_trainer_app/english_dictionary.txt', 'r') as file:
+    with open('english_dictionary.txt', 'r') as file:
         words = file.read().splitlines()
     selected_word = random.choice(words)
     random_word_ipa = ipa.convert(selected_word)
 
     # Generate the audio file for the pronunciation
-    engine = pyttsx3.init()
-    pronunciation_audio_file = f"pronunciation_{selected_word}.mpeg"
-    engine.save_to_file(selected_word, reference_recordings_path + pronunciation_audio_file)
-    engine.runAndWait()
+    ref_audio_save_path = os.path.join(reference_recordings_path)
+    if not os.path.exists(ref_audio_save_path):
+        os.makedirs(ref_audio_save_path)
 
-    convert_text_to_speech(random_word, reference_recordings_path + pronunciation_audio_file)
+    ref_audio_file_save_path = os.path.join(ref_audio_save_path, selected_word.replace(' ', '_'))
+    sound = convert_text_to_speech(selected_word, ref_audio_file_save_path)
 
     return jsonify({'random_word': selected_word, 'random_word_ipa': random_word_ipa,
-                    'pronunciation_audio': reference_recordings_path + pronunciation_audio_file})
+                    'pronunciation_audio': ref_audio_file_save_path})
 
 
 # https://www.makeuseof.com/tag/python-javascript-communicate-json/
