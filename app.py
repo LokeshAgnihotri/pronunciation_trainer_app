@@ -61,20 +61,38 @@ def getAudio(file_name):
 # speeech  to text
 
 def convert_audio_to_text(audio_file_location_name):
-    audio_file_location_name = "captured_recordings/audio.wav"
+    """
+    Converts an audio file to text using speech recognition.
+
+    Args:
+        audio_file_location_name (str): The location and name of the audio file.
+
+    Returns:
+        str: The recognized text from the audio file.
+    """
     converted_file = "captured_recordings/converted_audio.wav"
-    # Convert audio file to PCM WAV format
-    audio = AudioSegment.from_file(audio_file_location_name)
-    audio.export(converted_file, format="wav")
-    r = sr.Recognizer()
-    # Load the converted audio file
-    with sr.AudioFile(converted_file) as source:
-        audio_data = r.record(source)
-        text = r.recognize_google(audio_data)
-    import os
-    os.remove(converted_file)
-    print(text)
-    return text
+
+    try:
+        # Convert audio file to PCM WAV format
+        audio = AudioSegment.from_file(audio_file_location_name)
+        audio.export(converted_file, format="wav")
+
+        r = sr.Recognizer()
+
+        # Load the converted audio file
+        with sr.AudioFile(converted_file) as source:
+            audio_data = r.record(source)
+            text = r.recognize_google(audio_data)
+
+        # Remove the temporary converted file
+        os.remove(converted_file)
+
+        print(f"Recognized text: {text}")
+        return text
+
+    except Exception as e:
+        print(f"An error occurred: {str(e)}")
+        return None
 
 
 #  A method to convert the text to speech using pyttsx3
@@ -196,7 +214,7 @@ def upload_audio():
         os.makedirs(save_path)
     file_path = os.path.join(save_path, 'audio.wav')
     audio_file.save(file_path)
-    text = convert_audio_to_text(save_path)
+    text = convert_audio_to_text(file_path)
     print(jsonify({'text': text}))
 
     ref_text = request.form['ref_text']
