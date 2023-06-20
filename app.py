@@ -8,6 +8,7 @@ import speech_recognition as sr
 from flask import Flask, request, jsonify, render_template
 from flask import make_response
 from flask_cors import CORS
+from accuracy import *
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -99,7 +100,7 @@ def getAudioFromText():
 # Suggest next word
 @app.route('/next_word')
 def random_word():
-    with open('pronunciation_trainer_app\english_dictionary.txt', 'r') as file:
+    with open('english_dictionary.txt', 'r') as file:
         words = file.read().splitlines()
     selected_word = random.choice(words)
     random_word_ipa = ipa.convert(selected_word)
@@ -137,8 +138,21 @@ def upload_audio():
     print(jsonify({'text': text}))
 
     ref_text = request.form['ref_text']
-    accuracy = 4  # get_accuracy(ref_text, text)
-    return jsonify({'message': accuracy})
+
+    word_error = wer(ref_text, text)
+    char_error = cer(ref_text, text)
+
+    real_and_transcribed_words, real_and_transcribed_words_ipa, mapped_words_indices \
+        = matchSampleAndRecordedWords(ref_text, text)
+
+    pronunciation_accuracy, current_words_pronunciation_accuracy \
+        = getPronunciationAccuracy(real_and_transcribed_words)
+
+    return jsonify({'word_error': word_error, 'char_error': char_error,
+                    'pronunciation_accuracy': pronunciation_accuracy,
+                    'current_words_pronunciation_accuracy': current_words_pronunciation_accuracy,
+                    'real_and_transcribed_words': real_and_transcribed_words,
+                    'real_and_transcribed_words_ipa': real_and_transcribed_words_ipa})
 
 
 def get_accuracy(ref_text, actual_text):
