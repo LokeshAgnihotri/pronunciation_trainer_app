@@ -33,10 +33,29 @@ def main():
 @app.route(rootPath + '/reference_recordings/', methods=['GET', 'POST'])
 @app.route(rootPath + '/reference_recordings/<file_name>', methods=['GET', 'POST'])
 def getAudio(file_name):
-    response = make_response(open(reference_recordings_path + file_name + ".mpeg", 'rb').read())
-    response.headers['Content-Type'] = 'audio/wav'
-    response.headers['Content-Disposition'] = 'attachment; filename=sound.wav'
-    return response
+    """
+    Retrieves an audio file and returns it as a response.
+
+    Args:
+        file_name (str): The name of the audio file to be retrieved.
+
+    Returns:
+        flask.Response: The response object containing the audio file.
+    """
+    try:
+        audio_file_path = os.path.join(reference_recordings_path, file_name + ".mp3")
+
+        if not os.path.isfile(audio_file_path):
+            return make_response("Audio file not found", 404)
+
+        with open(audio_file_path, 'rb') as file:
+            response = make_response(file.read())
+            response.headers['Content-Type'] = 'audio/mpeg'
+            response.headers['Content-Disposition'] = 'attachment; filename=sound.mp3'
+            return response
+
+    except Exception as e:
+        return make_response(f"An error occurred: {str(e)}", 500)
 
 
 # speeech  to text
@@ -60,14 +79,44 @@ def convert_audio_to_text(audio_file_location_name):
 
 #  A method to convert the text to speech using pyttsx3
 def convert_text_to_speech(text, audio_name_location):
-    print(text)
+    """
+    Converts the given text to speech and saves it as an audio file.
+
+    Args:
+        text (str): The text to be converted to speech.
+        audio_name_location (str): The desired name and location of the output audio file.
+
+    Returns:
+        str: The filename of the generated audio file.
+    """
     engine = pyttsx3.init()
-    voices = engine.getProperty('voices')
-    engine.setProperty('voice', voices[1].id)  # changing voice to index 1 for female voice
-    pronunciation_audio_file = f"{audio_name_location}.mpeg"
-    engine.save_to_file(text, pronunciation_audio_file)
-    engine.runAndWait()
-    return pronunciation_audio_file
+
+    try:
+        voices = engine.getProperty('voices')
+        voice = None
+
+        # Search for a female voice
+        for v in voices:
+            if v.gender == 'female':
+                voice = v
+                break
+
+        if voice is None:
+            # If no female voice found, use the default voice
+            voice = voices[0]
+
+        engine.setProperty('voice', voice.id)
+        pronunciation_audio_file = f"{audio_name_location}.mp3"
+        engine.save_to_file(text, pronunciation_audio_file)
+        engine.runAndWait()
+
+        print(f"Text: {text}")
+        print(f"Audio file saved as: {pronunciation_audio_file}")
+        return pronunciation_audio_file
+
+    except Exception as e:
+        print(f"An error occurred: {str(e)}")
+        return None
 
 
 # convert text to IPA
