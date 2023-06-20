@@ -17,7 +17,7 @@ rootPath = ''
 app.config['UPLOAD_FOLDER'] = 'reference_recordings/'
 
 reference_recordings_path = 'reference_recordings/'
-captured_recordings_path = 'captured_recordings/'
+reference_recordings_path = 'C:/Users/lokes/Desktop/aI-TRAINER/pronunciation_trainer_app/reference_recordings/'
 
 reference_text = ''
 
