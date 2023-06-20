@@ -25,7 +25,7 @@ class AppTestCase(unittest.TestCase):
         assert response.status_code == 200
 
     def test_random_word(self):
-        response = self.client.get("/random_word")
+        response = self.client.get("/next_word")
         assert response.status_code == 200
 
 

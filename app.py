@@ -19,6 +19,8 @@ app.config['UPLOAD_FOLDER'] = 'reference_recordings/'
 
 reference_recordings_path = 'reference_recordings/'
 reference_recordings_path = 'C:/Users/lokes/Desktop/aI-TRAINER/pronunciation_trainer_app/reference_recordings/'
+captured_recordings_path = 'captured_recordings'
+
 
 reference_text = ''
 
@@ -130,6 +132,7 @@ def upload_audio():
 
     audio_file = request.files['audio']
     save_path = os.path.join(captured_recordings_path)
+
     if not os.path.exists(save_path):
         os.makedirs(save_path)
     file_path = os.path.join(save_path, 'audio.wav')
