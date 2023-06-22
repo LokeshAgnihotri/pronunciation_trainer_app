@@ -279,3 +279,146 @@ footer {
 .audio-element {
   display: none;
 }
+
+        /* Add your custom CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        #reftextform textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+
+        .h-button, .green-button, .blue-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .h-button {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+        }
+
+        .green-button {
+            background-color: #2ecc71;
+            color: #fff;
+            border: none;
+        }
+
+        .blue-button {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+        }
+
+        .animate-bottom {
+            animation: slide-up 0.5s;
+        }
+
+        @keyframes slide-up {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        #footeralert {
+            text-align: center;
+            padding: 10px;
+            background-color: #f2f2f2;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        #audioPlayerContainer {
+  width: 100%;
+  max-width: 400px; /* Adjust the maximum width as desired */
+  margin: 0 auto; /* Center the container horizontally */
+}
+
+#audioPlayerContainer audio {
+  width: 100%;
+  height: 50px; /* Adjust the height as desired */
+  background-color: #f1f1f1; /* Add your desired background color */
+  border: none;
+  border-radius: 25px; /* Adjust the border radius as desired */
+  outline: none;
+  padding: 5px; /* Adjust the padding as desired */
+}
+
+#audioPlayerContainer audio::-webkit-media-controls-panel {
+  background-color: #f1f1f1; /* Add your desired background color */
+  border-radius: 25px; /* Adjust the border radius as desired */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Add a box shadow */
+}
+
+#audioPlayerContainer audio::-webkit-media-controls-play-button,
+#audioPlayerContainer audio::-webkit-media-controls-volume-slider {
+  background-color: #435f7a; /* Add your desired background color */
+  border-radius: 50%; /* Adjust the border radius as desired */
+}
+
+#audioPlayerContainer audio::-webkit-media-controls-play-button:before {
+  content: "▶"; /* Add your desired play button icon */
+  font-size: 20px; /* Adjust the font size as desired */
+  color: #fff; /* Add your desired play button color */
+}
+
+#audioPlayerContainer audio::-webkit-media-controls-volume-slider {
+  width: -0px; /* Adjust the width as desired */
+  height: 10px; /* Adjust the height as desired */
+}
+
+
+.green-button:active{
+      background-color: #3e8e41;
+}

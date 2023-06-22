@@ -23,7 +23,7 @@
     }
     .audio-recording-container {
         width: 100%;
-        height: 100vh;
+        height: 10vh;
         /* view port height*/
         /*targeting Chrome & Safari*/
         display: -webkit-flex;
@@ -55,7 +55,7 @@
         /*horizontal centering*/
         align-items: center;
         width: 334px;
-        margin-bottom: 30px;
+        margin-bottom: 5px;
     }
     .cancel-recording-button,
     .stop-recording-button {
