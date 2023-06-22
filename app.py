@@ -218,6 +218,7 @@ def upload_audio():
     print(jsonify({'text': text}))
 
     ref_text = request.form['ref_text']
+    print(ref_text,text)
 
     word_error = wer(ref_text, text)
     char_error = cer(ref_text, text)
