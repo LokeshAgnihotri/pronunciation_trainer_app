@@ -24,4 +24,3 @@ watermelon is a fruit
 xylophone is a music instrument
 yellow is a color
 zebra is a animal
-```
