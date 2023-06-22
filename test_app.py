@@ -15,10 +15,6 @@ class AppTestCase(unittest.TestCase):
     def tearDown(self):
         self.ctx.pop()
 
-    def test_receiver(self):
-        response = self.client.post("/receiver", json={"text": "hello world"})
-        assert response.status_code == 200
-
     def test_home(self):
         response = self.client.get("/")
         assert response.status_code == 200
@@ -26,10 +22,13 @@ class AppTestCase(unittest.TestCase):
     def test_getAudio_file(self):
         response = self.client.get("/reference_recordings/lemon_is_a_fruit")
         assert response.status_code == 200
+        assert response.json["sound"] is not None
 
     def test_random_word(self):
         response = self.client.get("/next_word")
         assert response.status_code == 200
+        assert response.json["random_word"] is not None
+        assert response.json["random_word_ipa"] is not None
 
 
 if __name__ == "__main__":

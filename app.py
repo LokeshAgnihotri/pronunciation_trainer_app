@@ -168,15 +168,6 @@ def pronunciation_trainer() -> str:
     return json.dumps(response)
 
 
-@app.route(rootPath + '/receiver', methods=['POST'])
-def getAudioFromText() -> Response:
-    event = {'body': json.dumps(request.get_json(force=True))}
-    print(event)
-    data = request.get_json()
-    data = jsonify(data)
-    return data
-
-
 # Suggest next word
 @app.route('/next_word')
 def random_word() -> Response:
