@@ -2,12 +2,13 @@ import json
 import os
 import random
 from ast import literal_eval
+from typing import Any, List, Tuple
 
 from pydub import AudioSegment
 import eng_to_ipa as ipa
 import pyttsx3
 import speech_recognition as sr
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, Response
 from flask import make_response
 from flask_cors import CORS
 from accuracy import *
@@ -60,7 +61,7 @@ def getAudio(file_name):
 
 # speeech  to text
 
-def convert_audio_to_text(audio_file_location_name):
+def convert_audio_to_text(audio_file_location_name) -> str | None:
     """
     Converts an audio file to text using speech recognition.
 
@@ -96,7 +97,7 @@ def convert_audio_to_text(audio_file_location_name):
 
 
 #  A method to convert the text to speech using pyttsx3
-def convert_text_to_speech(text, audio_name_location):
+def convert_text_to_speech(text, audio_name_location) -> str | None:
     """
     Converts the given text to speech and saves it as an audio file.
 
@@ -138,13 +139,13 @@ def convert_text_to_speech(text, audio_name_location):
 
 
 # convert text to IPA
-def convert_text_to_ipa(text):
+def convert_text_to_ipa(text) -> str:
     return ipa.convert(text)
 
 
 # Send audio and phonetic transcription to the front end
 @app.route(rootPath + '/pronunciation_trainer', methods=['POST'])
-def pronunciation_trainer():
+def pronunciation_trainer() -> str:
     event = {'body': json.dumps(request.get_json(force=True))}
     text = event['body']
     # text = request.json['text']
@@ -168,7 +169,7 @@ def pronunciation_trainer():
 
 
 @app.route(rootPath + '/receiver', methods=['POST'])
-def getAudioFromText():
+def getAudioFromText() -> Response:
     event = {'body': json.dumps(request.get_json(force=True))}
     print(event)
     data = request.get_json()
@@ -178,7 +179,7 @@ def getAudioFromText():
 
 # Suggest next word
 @app.route('/next_word')
-def random_word():
+def random_word() -> Response:
     with open('english_dictionary.txt', 'r') as file:
         words = file.read().splitlines()
     selected_word = random.choice(words)
@@ -201,7 +202,7 @@ def random_word():
 
 # route to receive the audioop
 @app.route('/upload-audio', methods=['POST', 'GET'])
-def upload_audio():
+def upload_audio() -> str | Response:
     if 'audio' not in request.files:
         return "error there is no audio"
     if 'ref_text' not in request.form:
