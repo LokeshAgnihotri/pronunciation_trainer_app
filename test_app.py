@@ -1,6 +1,9 @@
 import unittest
 
+import eng_to_ipa
+
 from app import app
+from flask import jsonify
 
 
 class AppTestCase(unittest.TestCase):
@@ -21,7 +24,7 @@ class AppTestCase(unittest.TestCase):
         assert response.status_code == 200
 
     def test_getAudio_file(self):
-        response = self.client.get("/reference_recordings/pronunciation_umbrella.mpeg")
+        response = self.client.get("/reference_recordings/lemon_is_a_fruit")
         assert response.status_code == 200
 
     def test_random_word(self):
