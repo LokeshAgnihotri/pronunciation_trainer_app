@@ -36,11 +36,9 @@ const textArea = document.getElementById("reftext");
 
 
 function update_score(current_words_pronunciation_accuracy, real_and_transcribed_words) {
-  var parentElement = document.getElementById("reftext2");
-  parentElement.innerHTML = "";
-
+  var parentElement = document.getElementById("Pronunciation_Accuracy_Score");
   for (let i = 0; i < current_words_pronunciation_accuracy.length; i++) {
-    var newElement = document.createElement('div');
+    var newElement = document.createElement('span');
 
     if (current_words_pronunciation_accuracy[i] > 80) {
       newElement.style.color = "green";
@@ -50,12 +48,17 @@ function update_score(current_words_pronunciation_accuracy, real_and_transcribed
       newElement.style.color = "red";
     }
 
-    newElement.textContent = real_and_transcribed_words[i][0];
+    newElement.textContent = real_and_transcribed_words[i][0] + " ";
     console.log(real_and_transcribed_words[i][0]);
     console.log(newElement);
-    console.log(newElement.textContent)
+    console.log(newElement.textContent);
+    console.log(newElement);
     parentElement.appendChild(newElement);
   }
+
+  parentElement.hidden = false;
+
+  console.log(parentElement);
 }
 
 
