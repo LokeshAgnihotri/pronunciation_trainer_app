@@ -228,24 +228,6 @@ def upload_audio() -> str | Response:
                     'real_and_transcribed_words_ipa': real_and_transcribed_words_ipa})
 
 
-def get_accuracy(ref_text, actual_text):
-    # Accuracy...
-    correct_letter = 0
-    total_letters = 0
-    for char in ref_text:
-        if char.isalpha():
-            total_letters += 1
-    ref_text_array = ref_text.split()
-    spoken_text_array = actual_text.split()
-    for i in range(0, len(ref_text_array)):
-        if ref_text_array[i] != spoken_text_array[i]:
-            if len(ref_text_array) == len(spoken_text_array):
-                for letter1, letter2 in zip(ref_text_array[i], spoken_text_array[i]):
-                    if letter1 == letter2:
-                        correct_letter += 1
-    return correct_letter / total_letters
-
-
 if __name__ == '__main__':
     language = 'en'
     app.run(host="0.0.0.0", port=5000, debug=True)
