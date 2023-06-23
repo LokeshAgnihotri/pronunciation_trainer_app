@@ -381,11 +381,11 @@ def removePunctuation(word: str) -> str:
     return ''.join([char for char in word if char not in punctuation])
 
 
-def getPronunciationAccuracy(real_and_transcribed_words_ipa) -> tuple[Any, list[float]]:
+def getPronunciationAccuracy(real_and_transcribed_words) -> tuple[Any, list[float]]:
     total_mismatches = 0.
     number_of_phonemes = 0.
     current_words_pronunciation_accuracy = []
-    for pair in real_and_transcribed_words_ipa:
+    for pair in real_and_transcribed_words:
         real_without_punctuation = removePunctuation(pair[0]).lower()
         number_of_word_mismatches = edit_distance_python(
             real_without_punctuation, removePunctuation(pair[1]).lower())
