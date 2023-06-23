@@ -17,6 +17,7 @@ var textIndicatorOfAudiPlaying = document.getElementsByClassName("text-indicatio
 
 //Listeners
 
+
 //Listen to start recording button
 microphoneButton.onclick = startAudioRecording;
 
@@ -35,10 +36,17 @@ audioElement.onended = hideTextIndicatorOfAudioPlaying;
 const textArea = document.getElementById("reftext");
 
 
+
+
+
 function update_score(current_words_pronunciation_accuracy, real_and_transcribed_words) {
   var parentElement = document.getElementById("Pronunciation_Accuracy_Score");
+   parentElement.innerHTML = ''; // Clear previous content
   for (let i = 0; i < current_words_pronunciation_accuracy.length; i++) {
-    var newElement = document.createElement('span');
+
+
+      var newElement = document.createElement('span');
+    // newElement = " ";
 
     if (current_words_pronunciation_accuracy[i] > 80) {
       newElement.style.color = "green";
