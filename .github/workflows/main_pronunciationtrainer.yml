@@ -25,6 +25,7 @@ jobs:
       - name: Create and start virtual environment
         run: |
           python -m venv venv
+          sudo apt-get --assume-yes install ffmpeg espeak
           source venv/bin/activate
       
       - name: Install dependencies
