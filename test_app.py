@@ -22,7 +22,7 @@ class AppTestCase(unittest.TestCase):
     def test_getAudio_file(self):
         response = self.client.get("/reference_recordings/lemon_is_a_fruit")
         assert response.status_code == 200
-        assert response.json["sound"] is not None
+        assert response.headers["Content-Type"] == "audio/mpeg"
 
     def test_random_word(self):
         response = self.client.get("/next_word")
