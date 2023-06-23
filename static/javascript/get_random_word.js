@@ -3,7 +3,7 @@ const next_button_audio = document.getElementById("next_button_audio");
 
 
 function next_word() {
-    fetch('http://127.0.0.1:5000/next_word')
+    fetch('/next_word')
       .then(response => response.json()) // Parse the response as JSON
       .then(data => {
         const randomWord = data.random_word;

@@ -6,7 +6,7 @@ const audio = document.getElementById("audio`")
 _button_pronounce_trainer.onclick = function () {
     next_button_audio.play()
 
-    fetch("http://127.0.0.1:5000/pronunciation_trainer",
+    fetch("/pronunciation_trainer",
         {
             method: 'POST',
             headers: {
