@@ -519,3 +519,6 @@ var audioRecorder = {
         getEventListeners(audioRecorder.mediaRecorder) will return an empty array of events.*/
     }
 }
+
+
+//testing

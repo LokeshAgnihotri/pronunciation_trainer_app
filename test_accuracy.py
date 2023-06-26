@@ -116,5 +116,11 @@ class MyTestCase(unittest.TestCase):
         char_error_rate = np.round(char_error_rate, 2)
         self.assertEqual(1, char_error_rate)
 
+    def test_word_error(self):
+        word_error_rate, len = word_errors("Hello World", "Bye World")
+        self.assertEqual(word_error_rate, 1)
+        self.assertEqual(len, 2)
+
+
 if __name__ == '__main__':
     unittest.main()
