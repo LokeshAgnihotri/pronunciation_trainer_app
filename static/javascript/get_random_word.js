@@ -1,7 +1,7 @@
 document.getElementById("next").addEventListener("click", next_word);
 const next_button_audio = document.getElementById("next_button_audio");
 
-
+let is_phonetic;
 function next_word() {
     fetch('/next_word')
       .then(response => response.json()) // Parse the response as JSON
@@ -14,6 +14,7 @@ function next_word() {
         document.getElementById("reftext").value = `${randomWord}`;
 
         document.getElementById("next_button_audio").src = randomWordAudio;
+        is_phonetic = true;
       });
   }
 

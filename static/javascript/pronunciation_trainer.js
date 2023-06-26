@@ -5,10 +5,7 @@ const audio = document.getElementById("audio");
 _button_pronounce_trainer.onclick = function () {
     next_button_audio.play();
 
-    // Check if _reftext value is a phonetics string
-    const phoneticsRegex = /^[A-Za-z\s]+$/;
-    if (!phoneticsRegex.test(_reftext.value)) {
-        // If it is not a phonetics string, proceed with the fetch request
+    if (is_phonetic === false) {
         fetch("http://127.0.0.1:5000/pronunciation_trainer", {
             method: 'POST',
             headers: {
@@ -17,20 +14,22 @@ _button_pronounce_trainer.onclick = function () {
             },
             body: JSON.stringify(_reftext.value)
         })
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                throw new Error("Something went wrong");
-            }
-        })
-        .then(jsonResponse => {
-            _reftext.value = jsonResponse['phenome'];
-            document.getElementById("audioPlayer").src = jsonResponse['sound'];
-            audioPlayer.play(); // Play the audio
-        })
-        .catch(error => {
-            alert(error.message);
-        });
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Something went wrong");
+                }
+            })
+            .then(jsonResponse => {
+                _reftext.value = jsonResponse['phenome'];
+                is_phonetic=true;
+                document.getElementById("audioPlayer").src = jsonResponse['sound'];
+                audioPlayer.play(); // Play the audio
+            })
+            .catch(error => {
+                alert(error.message);
+            });
     }
-};
+
+}
