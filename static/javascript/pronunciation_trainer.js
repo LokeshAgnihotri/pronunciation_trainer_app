@@ -28,7 +28,7 @@ _button_pronounce_trainer.onclick = function () {
                 audioPlayer.play();  // Play the audio
             }
         ).catch((error) => {
-            alert(error.message)
+            // alert(error.message)
         })
     }
 }

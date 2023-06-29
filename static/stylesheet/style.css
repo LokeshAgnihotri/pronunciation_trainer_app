@@ -46,6 +46,9 @@ textarea {
 .button-container {
   text-align: center;
   margin-bottom: 20px;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly ;
 }
 
 /* Common button styles */
@@ -314,11 +317,6 @@ footer {
             border: none;
         }
 
-        .green-button {
-            background-color: #2ecc71;
-            color: #fff;
-            border: none;
-        }
 
         .blue-button {
             background-color: #3498db;

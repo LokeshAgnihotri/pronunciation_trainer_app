@@ -1,0 +1,67 @@
+.stars-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .stars {
+      font-size: 24px;
+    }
+
+    .star {
+      color: yellow;
+    }
+
+    .star.red {
+      color: red;
+    }
+
+    .star.orange {
+      color: orange;
+    }
+
+    .star.golden {
+      color: goldenrod;
+    }
+
+    .star.animation {
+      animation-name: starAnimation;
+      animation-duration: 1.5s;
+      animation-iteration-count: infinite;
+    }
+
+    .burst-animation {
+      width: 200px;
+      height: 200px;
+      background-image: url('captured_recordings/giphy.gif');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      animation-name: burstAnimation;
+      animation-duration: 1.5s;
+      animation-fill-mode: forwards;
+    }
+
+    @keyframes burstAnimation {
+      0% {
+        transform: scale(0);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 0;
+      }
+    }
+
+    @keyframes starAnimation {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.2);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
