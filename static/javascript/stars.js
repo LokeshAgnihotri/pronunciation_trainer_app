@@ -1,3 +1,5 @@
+const starRating = document.getElementById("starRating");
+
   function showStars(value) {
       const starRating = document.getElementById("starRating");
       starRating.innerHTML = "";
@@ -51,12 +53,10 @@
           stars.innerHTML = "★☆☆☆☆";
         }
 
+        if (value === 100) {
+          stars.classList.add("animation");
+        }
         starsContainer.appendChild(stars);
       }
-
       starRating.appendChild(starsContainer);
-
-      if (value === 100) {
-        stars.classList.add("animation");
-      }
     }
