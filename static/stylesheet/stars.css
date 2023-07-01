@@ -33,7 +33,7 @@
     .burst-animation {
       width: 200px;
       height: 200px;
-      background-image: url('captured_recordings/giphy.gif');
+      background-image: url('static/javascript/giphy.gif');
       background-repeat: no-repeat;
       background-position: center;
       background-size: cover;

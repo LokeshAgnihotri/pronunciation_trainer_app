@@ -115,7 +115,7 @@ function sendAudioData(recorderAudioAsBlob) {
 
         update_score(current_words_pronunciation_accuracy, real_and_transcribed_words);
 
-        document.getElementById('accuracyscore').textContent = pronunciation_accuracy;
+        document.getElementById('accuracyscore').textContent = pronunciation_accuracy + '%';
         showStars(pronunciation_accuracy);
       })
     .catch(function(error) {
