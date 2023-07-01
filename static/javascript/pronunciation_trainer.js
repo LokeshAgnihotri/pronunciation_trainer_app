@@ -1,6 +1,13 @@
 const _button_pronounce_trainer = document.getElementById("button_pronounce_trainer")
 const _reftext = document.getElementById("reftext")
 const audio = document.getElementById("audio`")
+_reftext.onchange = function () {
+    is_ref_text = true;
+}
+
+_reftext.input = function () {
+    is_ref_text = true;
+}
 
 _button_pronounce_trainer.onclick = function () {
     next_button_audio.play()

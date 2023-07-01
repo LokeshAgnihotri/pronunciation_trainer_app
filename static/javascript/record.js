@@ -93,12 +93,18 @@ function sendAudioData(recorderAudioAsBlob) {
   })
       .then(response => response.json()) // Parse the response as JSON
       .then(data => {
-        var word_error = data.word_error;
-        var char_error = data.char_error;
-        var pronunciation_accuracy = data.pronunciation_accuracy;
-        var current_words_pronunciation_accuracy = data.current_words_pronunciation_accuracy;
-        var real_and_transcribed_words = data.real_and_transcribed_words;
-        var real_and_transcribed_words_ipa = data.real_and_transcribed_words_ipa;
+          var status = data.status;
+          if (status == "success") {
+              var word_error = data.accuracy.word_error;
+              var char_error = data.accuracy.char_error;
+              var pronunciation_accuracy = data.accuracy.pronunciation_accuracy;
+              var current_words_pronunciation_accuracy = data.accuracy.current_words_pronunciation_accuracy;
+              var real_and_transcribed_words = data.accuracy.real_and_transcribed_words;
+              var real_and_transcribed_words_ipa = data.accuracy.real_and_transcribed_words_ipa;
+          }
+          else {
+              alert("Error: " + data.error)
+          }
 
         console.log(word_error);
         console.log(char_error);

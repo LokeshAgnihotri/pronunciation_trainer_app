@@ -197,6 +197,9 @@ def upload_audio() -> str | Response:
     ref_text = request.form['ref_text']
     print(ref_text,text)
 
+    if text is None or ref_text is None:
+        return jsonify({'status': 'failure', 'error': 'Failed to convert Speech to Text'})
+
     word_error = wer(ref_text, text)
     char_error = cer(ref_text, text)
 
@@ -206,11 +209,11 @@ def upload_audio() -> str | Response:
     pronunciation_accuracy, current_words_pronunciation_accuracy \
         = getPronunciationAccuracy(real_and_transcribed_words)
 
-    return jsonify({'word_error': word_error, 'char_error': char_error,
-                    'pronunciation_accuracy': pronunciation_accuracy,
-                    'current_words_pronunciation_accuracy': current_words_pronunciation_accuracy,
-                    'real_and_transcribed_words': real_and_transcribed_words,
-                    'real_and_transcribed_words_ipa': real_and_transcribed_words_ipa})
+    return jsonify({'status': 'success', 'accuracy': {'word_error': word_error, 'char_error': char_error,
+                               'pronunciation_accuracy': pronunciation_accuracy,
+                               'current_words_pronunciation_accuracy': current_words_pronunciation_accuracy,
+                               'real_and_transcribed_words': real_and_transcribed_words,
+                               'real_and_transcribed_words_ipa': real_and_transcribed_words_ipa}})
 
 
 if __name__ == '__main__':
