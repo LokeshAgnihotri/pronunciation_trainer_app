@@ -148,7 +148,7 @@ def pronunciation_trainer() -> str:
     #   Create JSON response
     response = {
         'phenome': phenome,
-        'sound': sound
+        'sound': ref_audio_file_save_path
     }
     return json.dumps(response)
 

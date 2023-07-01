@@ -10,8 +10,8 @@ _reftext.input = function () {
 }
 
 _button_pronounce_trainer.onclick = function () {
-    next_button_audio.play()
     if (!is_ref_text) {
+        next_button_audio.play()
     } else {
         fetch("/pronunciation_trainer",
             {
@@ -31,8 +31,8 @@ _button_pronounce_trainer.onclick = function () {
             }).then(jsonResponse => {
                 is_ref_text = false;
                 _reftext.value = jsonResponse['phenome'] + '\n' + '\n' + _reftext.value;
-                document.getElementById("audioPlayer").src = jsonResponse['sound'];
-                audioPlayer.play();  // Play the audio
+                document.getElementById("next_button_audio").src = jsonResponse['sound'];
+                next_button_audio.play();  // Play the audio
             }
         ).catch((error) => {
             // alert(error.message)
