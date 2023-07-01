@@ -53,19 +53,7 @@ def _levenshtein_distance(ref, hyp):
 
 
 def word_errors(reference, hypothesis, ignore_case=False, delimiter=' '):
-    """Compute the levenshtein distance between reference sequence and
-    hypothesis sequence in word-level.
-    :param reference: The reference sentence.
-    :type reference: basestring
-    :param hypothesis: The hypothesis sentence.
-    :type hypothesis: basestring
-    :param ignore_case: Whether case-sensitive or not.
-    :type ignore_case: bool
-    :param delimiter: Delimiter of input sentences.
-    :type delimiter: char
-    :return: Levenshtein distance and word number of reference sentence.
-    :rtype: list
-    """
+
     if ignore_case:
         reference = reference.lower()
         hypothesis = hypothesis.lower()
@@ -78,19 +66,7 @@ def word_errors(reference, hypothesis, ignore_case=False, delimiter=' '):
 
 
 def char_errors(reference, hypothesis, ignore_case=False, remove_space=False):
-    """Compute the levenshtein distance between reference sequence and
-    hypothesis sequence in char-level.
-    :param reference: The reference sentence.
-    :type reference: basestring
-    :param hypothesis: The hypothesis sentence.
-    :type hypothesis: basestring
-    :param ignore_case: Whether case-sensitive or not.
-    :type ignore_case: bool
-    :param remove_space: Whether remove internal space characters
-    :type remove_space: bool
-    :return: Levenshtein distance and length of reference sentence.
-    :rtype: list
-    """
+
     if ignore_case:
         reference = reference.lower()
         hypothesis = hypothesis.lower()

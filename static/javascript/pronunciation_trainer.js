@@ -23,7 +23,7 @@ _button_pronounce_trainer.onclick = function () {
                 }
             }).then(jsonResponse => {
                 is_ref_text = false;
-                _reftext.value = jsonResponse['phenome'];
+                _reftext.value = jsonResponse['phenome'] + '\n' + '\n' + _reftext.value;
                 document.getElementById("audioPlayer").src = jsonResponse['sound'];
                 audioPlayer.play();  // Play the audio
             }

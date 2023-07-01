@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../static/stylesheet/reset.css" />
     <link rel="stylesheet" href="../static/stylesheet/font.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../static/stylesheet/stars.css" />
 
 
      <script>
@@ -25,7 +26,7 @@
         <div id="ttscont">
             <div class="button-container">
                 <button id="button_pronounce_trainer" class="h-button">
-                    <span class="fa fa-headphones"></span> How Pronounce
+                    <span class="fa fa-headphones"></span> Pronunciation Trainer
                 </button>
             </div>
         </div>
@@ -46,6 +47,9 @@
                 <span class="fa fa-random"></span> Next Sentence
             </button>
         </div>
+        <div class="randomclass">
+
+        </div>
 
         <div id="recordcont">
             <div id="recordingsList"></div>
@@ -64,7 +68,12 @@
                             <tr>
                                 <td id="accuracyscore"></td>
                             </tr>
+
                         </table>
+                                     <div class="stars-container" id="starRating"></div>
+
+
+
                     </div>
                 </div>
 
@@ -114,24 +123,26 @@
         </div>
     </div>
 
+
+
+
+
         <footer id="footeralert">Please allow the use of your microphone.</footer>
     </div>
+
+
 
     <script src="../static/javascript/pronunciation_trainer.js"></script>
     <script src="../static/javascript/get_random_word.js"></script>
     <script src="../static/javascript/record.js"></script>
     <script src="../static/javascript/gettingtext.js"></script>
-
-
-
-
+    <script src="../static/javascript/stars.js"></script>
 
 
 
     <div id="Pronunciation_Accuracy_Score" hidden="hidden">
 
     </div>
-
 
 
 </body>

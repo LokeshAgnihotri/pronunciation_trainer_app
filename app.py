@@ -65,11 +65,6 @@ def convert_audio_to_text(audio_file_location_name) -> str | None:
     """
     Converts an audio file to text using speech recognition.
 
-    Args:
-        audio_file_location_name (str): The location and name of the audio file.
-
-    Returns:
-        str: The recognized text from the audio file.
     """
     converted_file = "captured_recordings/converted_audio.wav"
 
@@ -98,16 +93,6 @@ def convert_audio_to_text(audio_file_location_name) -> str | None:
 
 #  A method to convert the text to speech using pyttsx3
 def convert_text_to_speech(text, audio_name_location) -> str | None:
-    """
-    Converts the given text to speech and saves it as an audio file.
-
-    Args:
-        text (str): The text to be converted to speech.
-        audio_name_location (str): The desired name and location of the output audio file.
-
-    Returns:
-        str: The filename of the generated audio file.
-    """
     engine = pyttsx3.init()
 
     try:
