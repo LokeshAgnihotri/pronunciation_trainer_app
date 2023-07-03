@@ -107,7 +107,7 @@ def convert_text_to_speech(text, audio_name_location) -> str | None:
 
         if voice is None:
             # If no female voice found, use the default voice
-            voice = voices[0]
+            voice = voices[1]
 
         engine.setProperty('voice', voice.id)
         pronunciation_audio_file = f"{audio_name_location}.mp3"
@@ -219,3 +219,4 @@ def upload_audio() -> str | Response:
 if __name__ == '__main__':
     language = 'en'
     app.run(host="0.0.0.0", port=5000, debug=True)
+# test
